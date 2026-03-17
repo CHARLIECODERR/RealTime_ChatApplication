@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 
 import './Join.css';
 
+// This is the first page the user sees. It asks for their Name and Room.
 export default function SignIn() {
+  // State variables to store the user's name and the room they want to join
   const [name, setName] = useState('');
   const [room, setRoom] = useState('');
 

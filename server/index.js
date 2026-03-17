@@ -3,17 +3,21 @@ const express = require('express');
 const socketio = require('socket.io');
 const cors = require('cors');
 
+// Import functions to manage users (add, remove, get info)
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 
 const router = require('./router');
 
 const app = express();
 const server = http.createServer(app);
+// Initialize Socket.io to allow real-time communication between server and clients
 const io = socketio(server);
 
+// Enable CORS so the frontend can communicate with this server
 app.use(cors());
 app.use(router);
 
+// Runs whenever a new user connects to our server via a socket
 io.on('connect', (socket) => {
   socket.on('join', ({ name, room }, callback) => {
     const { error, user } = addUser({ id: socket.id, name, room });
